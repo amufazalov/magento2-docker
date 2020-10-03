@@ -1,0 +1,41 @@
+#!/bin/bash
+
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+    --production )
+        production=1
+        ;;
+esac; shift; done
+if [[ "$1" == '--' ]]; then shift; fi
+
+if [[ $production ]]; then
+    action="./bin/composer install --no-dev --quiet --no-interaction"
+else
+    action="./bin/composer update"
+fi
+
+if [ ! -f ./src/bin/magento ]; then
+    eval $action
+    ./bin/setup
+    exit 0
+fi
+
+./bin/magento maintenance:enable
+eval $action
+
+./bin/magento setup:upgrade
+
+./bin/cli sh -c '
+rm -rf "$MAGENTO_ROOT"/generated/*
+rm -rf "$MAGENTO_ROOT"/pub/static/*
+if [ "${MAGENTO_RUN_MODE}" = "production" ]; then
+    php "$MAGENTO_ROOT"/bin/magento setup:di:compile
+    php "$MAGENTO_ROOT"/bin/magento setup:static-content:deploy
+fi
+'
+
+./bin/magento cache:flush
+./bin/magento indexer:reindex
+
+./bin/composer dump-autoload -o
+
+./bin/magento maintenance:disable

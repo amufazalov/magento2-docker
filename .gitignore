@@ -1,0 +1,13 @@
+.idea
+.DS_Store
+.env
+!src/
+src/*
+!src/composer.json
+!src/composer.lock
+!src/app/
+src/app/*
+!src/app/code/
+!src/app/design/
+src/app/etc/*
+!src/app/etc/config.php

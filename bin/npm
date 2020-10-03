@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ if [[ "$1" == "--grunt" ]]
+ then
+     arr=()
+     for param in "$@"
+         do
+             if [[ "$param" == "--grunt" ]]
+             then
+                 continue
+             fi
+             arr+=($param)
+         done
+         command="cd ./src && grunt ${arr[@]}"
+         ./bin/cli bash -c "${command}"
+ else
+  ./bin/cli bash -c "cd ./src && npm $*"
+ fi

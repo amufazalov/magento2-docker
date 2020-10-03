@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rm -rf /media/Media/Code/mageinn.com/msb.test/src/pub/static/frontend/Scommerce/msb/en_GB
+rm -rf /media/Media/Code/mageinn.com/msb.test/src/var/view_preprocessed/pub/static/frontend/Scommerce/msb/en_GB
+
+FILE=/media/Media/Code/mageinn.com/msb.test/src/pub/static/deployed_version.txt
+if [[ -f "$FILE" ]]; then
+    rm $FILE
+fi

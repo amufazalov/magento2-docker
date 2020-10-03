@@ -1,0 +1,139 @@
+version: "3"
+
+services:
+#  nginx-proxy:
+#    image: jwilder/nginx-proxy
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - /var/run/docker.sock:/tmp/docker.sock:ro
+#    networks:
+#    - project-backend
+
+  nginx:
+    image: kunrag/m2-nginx
+    env_file: .env
+    ports:
+      - 443:443
+    links:
+#      - nginx-proxy
+      - fpm
+    depends_on:
+#      - nginx-proxy
+      - fpm
+    volumes: &appvolumes
+      - ./src:/var/www/magento/src
+      - ~/.composer:/var/www/magento/.composer
+      - ~/.npm:/var/www/magento/.npm
+      - project-sockdata:/sock
+    networks:
+      - project-backend
+    logging:
+      options:
+        max-size: "2m"
+        max-file: "3"
+
+  fpm:
+    image: kunrag/m2-php-7.3-fpm
+    env_file: .env
+    restart: always
+    links:
+      - db
+    depends_on:
+      - app
+    volumes: *appvolumes
+    networks:
+      - project-backend
+    logging:
+      options:
+        max-size: "2m"
+        max-file: "3"
+
+  app:
+    image: kunrag/m2-php-7.3-cli
+    env_file: .env
+    tty: true
+    links:
+      - db
+    depends_on:
+      - db
+    volumes: *appvolumes
+    networks:
+      - project-backend
+    logging:
+      options:
+        max-size: "2m"
+        max-file: "3"
+
+  cron:
+    image: kunrag/m2-php-7.2-cli
+    env_file: .env
+    command: "sudo /usr/local/bin/run-cron"
+    tty: true
+    links:
+      - db
+    depends_on:
+      - db
+    volumes: *appvolumes
+    networks:
+      - project-backend
+    logging:
+      options:
+        max-size: "2m"
+        max-file: "3"
+
+  db:
+    image: mysql:5
+   # command: --max_allowed_packet=2147483648 --max_execution_time=999999999
+    env_file: .env
+    ports:
+      - 3306:3306
+    volumes:
+      - project-dbdata:/var/lib/mysql
+    networks:
+      - project-backend
+    logging:
+      options:
+        max-size: "2m"
+        max-file: "3"
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - project-backend
+    logging:
+      options:
+        max-size: "2m"
+        max-file: "3"
+
+  elasticsearch:
+    image: elasticsearch:7.6.0
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - node.name=node-1
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./elasticsearchdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - project-backend
+
+networks:
+  project-backend:
+    driver: bridge
+
+volumes:
+  project-dbdata:
+  project-sockdata:

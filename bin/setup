@@ -1,0 +1,65 @@
+#!/bin/bash
+
+exec 3>src/m2-version
+
+./bin/cli sh -c '
+echo "Check Magento 2 version..."
+php "$MAGENTO_ROOT"/bin/magento -V
+'
+
+./bin/cli sh -c '
+php "$MAGENTO_ROOT"/bin/magento setup:install \
+  --db-host="$MYSQL_HOSTNAME" \
+  --db-name="$MYSQL_DATABASE" \
+  --db-user="$MYSQL_USERNAME" \
+  --db-password="$MYSQL_ROOT_PASSWORD" \
+  --base-url="$MAGENTO_BASE_URL" \
+  --admin-firstname="$MAGENTO_ADMIN_FIRSTNAME" \
+  --admin-lastname="$MAGENTO_ADMIN_LASTNAME" \
+  --admin-email="$MAGENTO_ADMIN_EMAIL" \
+  --admin-user="$MAGENTO_ADMIN_USER" \
+  --admin-password="$MAGENTO_ADMIN_PASSWORD" \
+  --language="$MAGENTO_LANGUAGE" \
+  --currency="$MAGENTO_CURRENCY" \
+  --timezone="$MAGENTO_TIMEZONE" \
+  --backend-frontname="$MAGENTO_BACKEND_FRONTNAME" \
+  --use-rewrites=1 \
+  --search-engine=elasticsearch7 \
+  --elasticsearch-host=elasticsearch \
+  --elasticsearch-port=9200 \
+  --elasticsearch-enable-auth=0 \
+  --elasticsearch-timeout=15 \
+  --elasticsearch-index-prefix=magento
+'
+
+./bin/cli sh -c '
+echo "Turning on $MAGENTO_RUN_MODE mode..."
+php "$MAGENTO_ROOT"/bin/magento deploy:mode:set $MAGENTO_RUN_MODE
+'
+
+echo "Copy auth file..."
+./bin/cli sh -c '
+cp "$HOME"/.composer/auth.json "$MAGENTO_ROOT"/var/composer_home/auth.json
+'
+echo "Upgrade and flush cache..."
+./bin/magento setup:upgrade
+./bin/magento cache:flush
+
+echo "Reindex..."
+./bin/magento indexer:reindex
+
+echo "Dump composer autoload..."
+./bin/composer dump-autoload -o
+
+./bin/cli sh -c '
+echo "
+===================== 🚀 Done 🚀 ===================
+
+      Magento 2 Installed successfully!
+
+      🌎 Admin: $MAGENTO_BASE_URL/$MAGENTO_BACKEND_FRONTNAME
+      👤 User: $MAGENTO_ADMIN_USER
+      🔑 Password: $MAGENTO_ADMIN_PASSWORD
+
+===================== 🚀 Done 🚀 ==================="
+'
