@@ -53,6 +53,8 @@ COMPOSER_MAGENTO_USERNAME | Public marketplace key    | None
 COMPOSER_MAGENTO_PASSWORD | Private marketplace key   | None
 ENABLE_MAILHOG        | Start MailHog service for local development | true
 PHP_ENABLE_XDEBUG        | Enable / Disable the XDebug | false
+VIRTUAL_PORT        | Port of the server (80/443) | 443
+SERVER_SSL        | On / Off the SSL | on
 
 По умолчанию переменные окружения COMPOSER_GITHUB_TOKEN, COMPOSER_MAGENTO_USERNAME, COMPOSER_MAGENTO_PASSWORD 
 не используются при локальной разработке, поэтому закомментированы
