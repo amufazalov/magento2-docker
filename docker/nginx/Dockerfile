@@ -7,12 +7,6 @@ ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN addgroup --gid 1000 docker
 RUN usermod -a -G docker nginx
 
-ENV SERVER_NAME dvdlkm2.test
-ENV UPLOAD_MAX_FILESIZE 64M
-ENV MAGENTO_ROOT /var/www/magento/src
-ENV MAGENTO_RUN_MODE production
-ENV DEBUG false
-
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 
 RUN mkdir /sock

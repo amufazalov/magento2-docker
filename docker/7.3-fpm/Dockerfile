@@ -46,13 +46,6 @@ RUN echo "max_execution_time=900" >> /usr/local/etc/php/conf.d/docker-php-ext-xd
 RUN curl --location --output /usr/local/bin/mhsendmail https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 \
   && chmod +x /usr/local/bin/mhsendmail
 
-ENV MAGENTO_ROOT /var/www/magento/src
-ENV MAGENTO_RUN_MODE production
-ENV UPLOAD_MAX_FILESIZE 64M
-ENV PHP_MEMORY_LIMIT 2G
-ENV PHP_ENABLE_XDEBUG false
-ENV DEBUG false
-
 ADD etc/php-xdebug.ini /usr/local/etc/php/conf.d/zz-xdebug-settings.ini
 ADD etc/mail.ini /usr/local/etc/php/conf.d/zz-mail.ini
 ADD etc/php-fpm.ini /usr/local/etc/php/conf.d/zz-magento.ini

@@ -64,8 +64,6 @@ RUN USER=docker && \
 RUN curl --location --output /usr/local/bin/mhsendmail https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 \
   && chmod +x /usr/local/bin/mhsendmail
 
-ENV MAGENTO_ROOT /var/www/magento/src
-
 ADD etc/php-xdebug.ini /usr/local/etc/php/conf.d/zz-xdebug-settings.ini
 ADD etc/mail.ini /usr/local/etc/php/conf.d/zz-mail.ini
 ADD etc/php-cli.ini /usr/local/etc/php/conf.d/zz-magento.ini
