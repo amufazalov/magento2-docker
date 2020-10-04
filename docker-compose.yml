@@ -68,7 +68,7 @@ services:
         max-file: "3"
 
   cron:
-    image: kunrag/m2-php-7.2-cli
+    image: kunrag/m2-php-7.3-cli
     env_file: .env
     command: "sudo /usr/local/bin/run-cron"
     tty: true
@@ -130,6 +130,16 @@ services:
       - 9300:9300
     networks:
       - project-backend
+
+  livereloader:
+    image: apogiatzis/livereloading
+    privileged: true
+    environment:
+      - RELOAD_DELAY=1.5              # seconds
+      - RELOAD_CONTAINER=app
+    volumes:
+      - project-sockdata:/sock
+      - ./src:/var/www/magento/src
 
 networks:
   project-backend:
