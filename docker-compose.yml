@@ -68,7 +68,7 @@ services:
         max-file: "3"
 
   cron:
-    image: kunrag/m2-php-7.2-cli
+    image: kunrag/m2-php-7.3-cli
     env_file: .env
     command: "sudo /usr/local/bin/run-cron"
     tty: true
