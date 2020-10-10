@@ -88,6 +88,7 @@ SERVER_SSL        | On / Off the SSL | on
 * `bin/db-restore` - импортирует БД `dump.sql` из папки `backup`. И заменяет базовый url на MAGENTO_BASE_URL
 * `bin/composer` - работа с композером 
 * `bin/dev-urn-catalog-generate` - генерация `misc.xml` для IDE PHPStorm
+* `bin/x-debug` - вкл / выкл XDebug. Меняет значение переменной PHP_ENABLE_XDEBUG на противоположное и перезапускает контейнеры.
 
 #### Особенности
 В случае установки **Magento 2** ниже версии 2.3.5, нужно из _bin/setup_ скрипта удалить строки

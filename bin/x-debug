@@ -1,0 +1,23 @@
+#!/bin/bash
+
+PHP_CONTAINER=$(docker-compose ps -q app)
+FPM_CONTAINER=$(docker-compose ps -q fpm)
+NGINX_CONTAINER=$(docker-compose ps -q nginx)
+
+PHP_ENABLE_XDEBUG=$(grep PHP_ENABLE_XDEBUG .env | cut -d '=' -f2)
+SCRIPT_PATH=$(dirname $(dirname $(realpath -s $0)))
+ENV_PATH="${SCRIPT_PATH}/.env"
+
+if [[ $PHP_ENABLE_XDEBUG == true ]]
+then
+  INFO="=========== The XDEBUG is DISABLED =========="
+  sed -i "s/PHP_ENABLE_XDEBUG=true/PHP_ENABLE_XDEBUG=false/" $ENV_PATH
+else
+  INFO="=========== The XDEBUG is ENABLED ==========="
+  sed -i "s/PHP_ENABLE_XDEBUG=false/PHP_ENABLE_XDEBUG=true/" $ENV_PATH
+fi
+
+docker-compose stop
+docker-compose up -d
+
+echo $INFO;
