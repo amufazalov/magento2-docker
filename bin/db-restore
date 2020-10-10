@@ -4,8 +4,16 @@ MYSQL_HOSTNAME=$(grep MYSQL_HOSTNAME .env | cut -d '=' -f2)
 MYSQL_DATABASE=$(grep MYSQL_DATABASE .env | cut -d '=' -f2)
 MYSQL_USERNAME=root
 MYSQL_ROOT_PASSWORD=$(grep MYSQL_ROOT_PASSWORD .env | cut -d '=' -f2)
+
 CONTAINER=$(docker-compose ps -q $MYSQL_HOSTNAME)
+APP_CONTAINER=$(docker-compose ps -q app)
+
+MAGENTO_BASE_URL=$(grep MAGENTO_BASE_URL .env | cut -d '=' -f2)
+MAGENTO_ROOT=$(grep MAGENTO_ROOT .env | cut -d '=' -f2)
 
 docker container exec -i $CONTAINER mysql -u$MYSQL_USERNAME -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < backup/dump.sql
 
+docker container exec -i $APP_CONTAINER php $MAGENTO_ROOT/bin/magento setup:store-config:set --base-url="${MAGENTO_BASE_URL}"
+
+echo "The base url has been changed to '${MAGENTO_BASE_URL}'"
 echo 'Done'

@@ -13,16 +13,21 @@
 Откройте данный файл и введите данное значение, если необходимо, и выполните команду `sudo sysctl -p`
 
 ### Локальная разработка
-1. Склонировать ваш проект в `./src`
-2. Переименовать `cp .env.example .env`. Установить нужные переменные окружения
-3. Запустить `bin/start`
-4. Запустить `bin/composer install`
-5. Запустить `bin/setup`
+1. Склонировать репозиторий `git clone https://github.com/amufazalov/magento2-docker.git`
+2. Создать папку `src` командой `make src`
+3. Склонировать ваш проект в `./src`
+4. Переименовать `cp .env.example .env`. Установить нужные переменные окружения
+5. Выполнить команду `bin/start`
+6. Расположить БД вашего проекта в папке `./backup` под именем `dump.sql`
+7. Выполнить команду `bin/db-restore`
+8. Выполнить команду `bin/composer install`
+9. Выполнить команды `bin/magento setup:upgrade`, `bin/magento setup:di:compile` и `bin/magento setup:static-content:deploy -f`
 
-Если нужна чистая установка, то `rm -rf src/* ` и запустить `bin/install`.
-После этого `bin/setup`
-
-Source проекта будет располагаться в папке src.
+### Чистая установка
+1. Склонировать репозиторий `git clone https://github.com/amufazalov/magento2-docker.git`
+2. Создать папку `src` командой `make src`
+3. Выполнить команду `bin/install`
+4. Выполнить команду `bin/setup`
 
 #### Кастомный .gitignore для Magento 2
 При желании можно заменить дефлотный _.gitignore_, который идет вместе с **Magento 2**.
@@ -80,7 +85,7 @@ SERVER_SSL        | On / Off the SSL | on
 * `bin/down` - уничтожение контейнеров
 * `bin/db-backup` - создание дампа текущей БД проекта `dump.sql` в папке `backup`
 * `bin/db-recreate` - создание чистой БД
-* `bin/db-restore` - импорт БД `dump.sql` из папки `backup`
+* `bin/db-restore` - импортирует БД `dump.sql` из папки `backup`. И заменяет базовый url на MAGENTO_BASE_URL
 * `bin/composer` - работа с композером 
 * `bin/dev-urn-catalog-generate` - генерация `misc.xml` для IDE PHPStorm
 
@@ -106,4 +111,5 @@ SERVER_SSL        | On / Off the SSL | on
 * `bin/magento setup:store-config:set --base-url-secure="https://localhost:8080/"`
 ##### Создание администратора
 * `bin/magento admin:user:create --admin-user="newadmin" --admin-password="a123456789" --admin-email="newadmin@example.com" --admin-firstname="firstname" --admin-lastname="lastname"`
-
+##### Установка Simple Data
+* `bin/magento sampledata:deploy`
