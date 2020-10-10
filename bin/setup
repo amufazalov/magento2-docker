@@ -1,7 +1,5 @@
 #!/bin/bash
 
-exec 3>src/m2-version
-
 ./bin/cli sh -c '
 echo "Check Magento 2 version..."
 php "$MAGENTO_ROOT"/bin/magento -V
