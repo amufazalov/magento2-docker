@@ -91,7 +91,7 @@ SERVER_SSL        | On / Off the SSL | on
 * `bin/x-debug` - вкл / выкл XDebug. Меняет значение переменной PHP_ENABLE_XDEBUG на противоположное и перезапускает контейнеры.
 
 #### Особенности
-В случае установки **Magento 2** ниже версии 2.3.5, нужно из _bin/setup_ скрипта удалить строки
+В случае установки **Magento 2** ниже версии 2.4, нужно из _bin/setup_ скрипта удалить строки
 
   --search-engine=elasticsearch7 \
   --elasticsearch-host=elasticsearch \
