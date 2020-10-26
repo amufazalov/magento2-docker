@@ -38,7 +38,6 @@ services:
   fpm:
     image: kunrag/m2-php-7.3-fpm
     env_file: .env
-    restart: always
     links:
       - db
     depends_on:
