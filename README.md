@@ -1,6 +1,6 @@
 # MAGENTO 2 Docker
 
-## Magento 2.4.0 + Nginx + PHP 7.3 + Mysql 5.7 + Elasticsearch 7.6.0 + XDebug
+## Magento 2.4.1 + Nginx + PHP 7.3 + Mysql 5.7 + Elasticsearch 7.6.0 + XDebug
 
 ### Перед тем как начать
 
