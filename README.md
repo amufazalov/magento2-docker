@@ -84,6 +84,7 @@ SERVER_SSL        | On / Off the SSL | on
 * `bin/start` - запуск контейнеров
 * `bin/stop` - остановка контейнеров
 * `bin/down` - уничтожение контейнеров
+* `bin/clean-frontend` - очистка фронтенда
 * `bin/db-backup` - создание дампа текущей БД проекта `dump.sql` в папке `backup`
 * `bin/db-recreate` - создание чистой БД
 * `bin/db-restore` - импортирует БД `dump.sql` из папки `backup`. И заменяет базовый url на MAGENTO_BASE_URL

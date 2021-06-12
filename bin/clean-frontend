@@ -1,9 +1,18 @@
 #!/bin/bash
 
-rm -rf /media/Media/Code/mageinn.com/msb.test/src/pub/static/frontend/Scommerce/msb/en_GB
-rm -rf /media/Media/Code/mageinn.com/msb.test/src/var/view_preprocessed/pub/static/frontend/Scommerce/msb/en_GB
+SCRIPT_PATH=$(dirname $(dirname $(realpath -s $0)))
 
-FILE=/media/Media/Code/mageinn.com/msb.test/src/pub/static/deployed_version.txt
+if [ $@ ]; then
+  rm -rf $SCRIPT_PATH/src/pub/static/frontend/$1
+  rm -rf $SCRIPT_PATH/src/var/view_preprocessed/pub/static/frontend/$1
+else
+  rm -rf $SCRIPT_PATH/src/pub/static/frontend/
+  rm -rf $SCRIPT_PATH/src/var/view_preprocessed/pub/static/frontend/
+fi
+
+FILE=$SCRIPT_PATH/pub/static/deployed_version.txt
 if [[ -f "$FILE" ]]; then
     rm $FILE
 fi
+
+echo "Done"
