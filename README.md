@@ -89,6 +89,7 @@ SERVER_SSL        | On / Off the SSL | on
 * `bin/db-recreate` - создание чистой БД
 * `bin/db-restore` - импортирует БД `dump.sql` из папки `backup`. И заменяет базовый url на MAGENTO_BASE_URL
 * `bin/composer` - работа с композером 
+* `bin/change-composer` - переключение версии композера (1 или 2) (`bin/change-composer 1`)
 * `bin/dev-urn-catalog-generate` - генерация `misc.xml` для IDE PHPStorm
 * `bin/x-debug` - вкл / выкл XDebug. Меняет значение переменной PHP_ENABLE_XDEBUG на противоположное и перезапускает контейнеры.
 
