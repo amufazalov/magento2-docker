@@ -15,7 +15,7 @@ services:
     image: kunrag/m2-nginx
     env_file: .env
     ports:
-#      - 35729:35729
+      - 35729:35729 #liverload
       - 443:443
       - 80:80
     links:

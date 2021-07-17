@@ -1,0 +1,23 @@
+#!/bin/bash
+SCRIPT_PATH=$(dirname $(dirname $(realpath -s $0)))
+
+if [ "$1" != "watch" ]; then
+  command="cd ./src && gulp ${1} ${2}"
+  ./bin/cli bash -c "${command}"
+elif [ "$1" == "watch" ]; then
+  command="cd ./src && gulp ${1} ${2} --live --map"
+  ./bin/cli bash -c "${command}"
+else
+  echo "======= First run ======="
+  echo "1. Configure your theme in ${SCRIPT_PATH}/src/dev/tools/grunt/configs/themes.js"
+  echo "2. Clean static (bin/clean-frontend)"
+  echo "3. Run bin/gulp exec --your-theme"
+  echo "4. Run bin/gulp less --your-theme"
+  echo "5. Run bin/gulp watch --your-theme"
+  echo "======= If added new file ======="
+  echo "After adding a new .less file in theme, stop 'watch' process and repeat steps 1 - 5"
+fi
+
+
+
+# ./bin/cli bash -c "cd ./src && npm $*"

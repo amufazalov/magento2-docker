@@ -80,7 +80,9 @@ SERVER_SSL        | On / Off the SSL | on
 * `bin/install` - Скачивание **Мagento 2** последней версии с помощью композера. Можно передать параметром версию (`bin/install 2.3`)
 * `bin/setup` - Установка **Мagento 2**. 
 * `bin/log` - Просмотр логов (`bin/log <container_name>`)
-* `bin/npm` - Работа с npm менеджером (`bin/npm install` или `bin/npm --grunt <command>` - работа с Grunt M2)
+* `bin/npm` - Работа с npm менеджером (`bin/npm install` или `bin/npm <command>`)
+* `bin/gulp-init` - Инициализация gulp (будет использован `helper/package.json`)
+* `bin/gulp` - Работа с gulp (`bin/gulp --tasks` - список команд,  `bin/gulp` - кастомные подсказки)
 * `bin/start` - запуск контейнеров
 * `bin/stop` - остановка контейнеров
 * `bin/down` - уничтожение контейнеров

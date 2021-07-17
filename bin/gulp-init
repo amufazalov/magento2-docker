@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT_PATH=$(dirname $(dirname $(realpath -s $0)))
+SRC_PATH=$SCRIPT_PATH/src
+
+cp $SCRIPT_PATH/helpers/package.json $SRC_PATH/package.json
+./bin/cli-root npm i -g gulp
+
+cp $SCRIPT_PATH/helpers/gulpfile.js $SRC_PATH/gulpfile.js
+cp $SRC_PATH/node_modules/livereload/bin/livereload.js $SRC_PATH/livereload.js
+
+./bin/cli sh -c '
+cd src && npm install
+'
+# && composer config repositories.gulp vcs https://github.com/subodha/magento-2-gulp.git

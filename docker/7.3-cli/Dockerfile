@@ -43,7 +43,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Install Node
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install nodejs -y
-RUN npm i -g grunt-cli
+#RUN npm i -g grunt-cli
 RUN npm i -g livereload
 
 # Create privilege user

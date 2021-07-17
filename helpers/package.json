@@ -1,0 +1,30 @@
+{
+  "name": "magento2",
+  "author": "Magento Commerce Inc.",
+  "description": "Magento2 node modules dependencies for local development",
+  "license": "(OSL-3.0 OR AFL-3.0)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/magento/magento2.git"
+  },
+  "homepage": "http://magento.com/",
+  "devDependencies": {
+    "glob": "~7.1.1",
+    "gulp": "^4.0.2",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-if": "^3.0.0",
+    "gulp-less": "^4.0.1",
+    "gulp-livereload": "^4.0.2",
+    "gulp-sourcemaps": "^3.0.0",
+    "livereload": "^0.9.3",
+    "imagemin-svgo": "~5.2.1",
+    "morgan": "~1.9.0",
+    "node-minify": "~2.3.1",
+    "path": "~0.12.7",
+    "serve-static": "~1.13.1",
+    "squirejs": "~0.2.1",
+    "strip-json-comments": "~2.0.1",
+    "time-grunt": "~1.4.0",
+    "underscore": "~1.8.0"
+  }
+}
