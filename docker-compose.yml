@@ -37,7 +37,7 @@ services:
         max-file: "3"
 
   fpm:
-    image: kunrag/m2-php-7.3-fpm
+    image: kunrag/m2-php-7.4-fpm
     env_file: .env
     links:
       - db
@@ -52,7 +52,7 @@ services:
         max-file: "3"
 
   app:
-    image: kunrag/m2-php-7.3-cli
+    image: kunrag/m2-php-7.4-cli
     env_file: .env
     tty: true
     links:

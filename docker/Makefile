@@ -1,5 +1,5 @@
-IMAGE_CLI := kunrag/m2-php-7.3-cli
-IMAGE_FPM := kunrag/m2-php-7.3-fpm
+IMAGE_CLI := kunrag/m2-php-7.4-cli
+IMAGE_FPM := kunrag/m2-php-7.4-fpm
 IMAGE_NGINX := kunrag/m2-nginx
 IMAGE_REDIS := kunrag/m2-redis
 IMAGE_VARNISH := kunrag/m2-varnish
@@ -14,17 +14,17 @@ build: cli fpm nginx
 push:
 	@docker push $(IMAGE_CLI):latest
 	@docker push $(IMAGE_FPM):latest
-	@docker push $(IMAGE_NGINX):latest
+#	@docker push $(IMAGE_NGINX):latest
 
 # Make php cli image
 .PHONY: cli
 cli:
-	@docker build -t $(IMAGE_CLI) 7.3-cli
+	@docker build -t $(IMAGE_CLI) 7.4-cli
 
 # Make php fpm image
 .PHONY: fpm
 fpm:
-	@docker build -t $(IMAGE_FPM) 7.3-fpm
+	@docker build -t $(IMAGE_FPM) 7.4-fpm
 
 # Make nginx image
 .PHONY: nginx

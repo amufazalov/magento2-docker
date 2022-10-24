@@ -1,6 +1,6 @@
 # MAGENTO 2 Docker
 
-## Magento 2.4.1 + Nginx + PHP 7.3 + Mysql 5.7 + Elasticsearch 7.6.0 + XDebug
+## Magento 2.4.3 + Nginx + PHP 7.4 + Mysql 5.7 + Elasticsearch 7.6.0 + XDebug
 
 ### Перед тем как начать
 
@@ -104,12 +104,6 @@ SERVER_SSL        | On / Off the SSL | on
   --elasticsearch-enable-auth=0 \
   --elasticsearch-timeout=15 \
   --elasticsearch-index-prefix=magento
-  
-Данные версии официально не поддерживают **ElasticSearch 7**. Или заменить данные настройки на нужную версию (5 или 6).
-Также изменить версию контейнеров **php** и **php-fpm** согласно сист. требованиям версии **Magento 2**
-(`kunrag/m2-php-7.2-fpm` и `kunrag/m2-php-7.2-fpm`). В папке docker лежит makefile и исходные данные образов.
-Можно конфигурировать как душе угодно, а затем запустить `make build`. Данна команда создаст обновленные образы
-на ваше локальной машине.
 
 #### Полезные команды
 ##### Изменение базовых url
