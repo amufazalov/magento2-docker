@@ -85,7 +85,7 @@ services:
 #        max-file: "3"
 
   db:
-    image: mysql:5
+    image: mariadb:10.4.13
    # command: --max_allowed_packet=2147483648 --max_execution_time=999999999
     env_file: .env
     ports:
