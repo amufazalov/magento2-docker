@@ -1,6 +1,6 @@
 # MAGENTO 2 Docker
 
-## Magento 2.4.3 + Nginx + PHP 7.4 + Mysql 5.7 + Elasticsearch 7.6.0 + XDebug
+## Magento 2.4.3 + Nginx + PHP 7.4 + MariaDB 10.4.13 + Elasticsearch 7.6.0 + XDebug
 
 ### Перед тем как начать
 
@@ -39,7 +39,7 @@
 Environment variable  | Description                   | Default
 --------------------  | -----------                   | -------
 MYSQL_HOSTNAME        | MySQL hostname                | db
-MYSQL_USERNAME        | MySQL username                | root
+MYSQL_USER            | MySQL username                | root
 MYSQL_ROOT_PASSWORD   | MySQL password                | root
 MYSQL_DATABASE        | MySQL database                | magento
 CRYPTO_KEY            | Magento Encryption key        | secured
